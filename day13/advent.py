@@ -45,3 +45,4 @@ for i, pair in enumerate(pairs):
         correct_indices.append(i+1)
 
 print(correct_indices)
+#ANSWER: 13 indices summed

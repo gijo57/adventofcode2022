@@ -30,3 +30,4 @@ for movement in movements:
 
 
 print(head_positions)
+#There are 13 positions the tail visited at least once.

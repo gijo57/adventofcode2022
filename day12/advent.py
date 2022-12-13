@@ -62,3 +62,4 @@ def solve():
 
 
 print(solve())
+#ANSWER: 31 steps
