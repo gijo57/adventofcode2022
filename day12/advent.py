@@ -1,7 +1,7 @@
 import numpy as np
 from collections import deque
 
-with open('example.txt') as f:
+with open('input.txt') as f:
     grid = [list(row.strip()) for row in f.readlines()]
     rows, cols = len(grid), len(grid[0])
 
