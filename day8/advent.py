@@ -1,6 +1,6 @@
 import numpy as np
 
-with open('example.txt') as f:
+with open('input.txt') as f:
     trees_map = [[int(tree) for tree in list(row.strip())] for row in f.readlines()]
     outer_count = (len(trees_map)-1)*4
     checked_trees = np.zeros((len(trees_map), len(trees_map)))
@@ -24,6 +24,46 @@ def check_direction(trees, checked, direction):
     return checked_trees
 
 
+def calc_scenic_score(row, col, lines):
+    scenic_score = 1
+    value = lines[row][col]
+
+    count1 = 1 if row > 0 else 0
+
+    for x in range(1, row):
+        if lines[row - x][col] >= value or row - x == 0:
+            break
+        count1 += 1
+
+    scenic_score *= count1
+    count2 = 1 if row < len(lines) - 1 else 0
+
+    for x in range(row + 1, len(lines)):
+        if lines[x][col] >= value or x == len(lines) - 1:
+            break
+        count2 += 1
+
+    scenic_score *= count2
+    count3 = 1 if col > 0 else 0
+
+    for x in range(1, col):
+        if lines[row][col - x] >= value or col - x == 0:
+            break
+        count3 += 1
+
+    scenic_score *= count3
+    count4 = 1 if col < len(lines) - 1 else 0
+
+    for x in range(col + 1, len(lines)):
+        if lines[row][x] >= value or x == len(lines) - 1:
+            break
+        count4 += 1
+
+    scenic_score *= count4
+
+    return scenic_score
+
+
 def solve1(checked_trees):
     checked_trees = check_direction(np.array(trees_map), checked_trees, 'right')
     checked_trees = check_direction(np.fliplr(trees_map), np.fliplr(checked_trees), 'left')
@@ -35,6 +75,8 @@ def solve1(checked_trees):
 
 
 def solve2():
+    highest_score = 0
+
     for i in range(len(trees_map)):
         for j in range(len(trees_map[0])):
             score = calc_scenic_score(i, j, trees_map)
@@ -45,5 +87,5 @@ def solve2():
 
 
 answer1 = solve1(checked_trees)
-answer2 = solve2(trees_map)
+answer2 = solve2()
 print(answer1, answer2)
