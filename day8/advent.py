@@ -1,10 +1,9 @@
 import numpy as np
 
-with open('input.txt') as f:
+with open('example.txt') as f:
     trees_map = [[int(tree) for tree in list(row.strip())] for row in f.readlines()]
     outer_count = (len(trees_map)-1)*4
     checked_trees = np.zeros((len(trees_map), len(trees_map)))
-    scenic_scores = np.zeros((len(trees_map), len(trees_map)))
 
 
 def check_direction(trees, checked, direction):
@@ -35,5 +34,16 @@ def solve1(checked_trees):
     return result
 
 
+def solve2():
+    for i in range(len(trees_map)):
+        for j in range(len(trees_map[0])):
+            score = calc_scenic_score(i, j, trees_map)
+
+            highest_score = score if score > highest_score else highest_score
+
+    return highest_score
+
+
 answer1 = solve1(checked_trees)
-print(answer1)
+answer2 = solve2(trees_map)
+print(answer1, answer2)
