@@ -1,4 +1,4 @@
-with open('input.txt') as f:
+with open('example.txt') as f:
     lines = [line.strip() for line in f.readlines()]
 
 monkeys = {line[0:4]: line[6:] for line in lines}
@@ -29,6 +29,6 @@ def solve1():
         i = (i + 1) % (len(names))
     return monkes['root']
 
+
 answer1 = solve1()
 print(answer1)
-print(monkeys)
